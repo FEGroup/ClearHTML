@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>reset code</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
+    <link rel="stylesheet" type="text/css" href="../vCommon/vCommon.css">
+    <link rel="stylesheet" type="text/css" href="css/reset_code.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="js/reset_code.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <header><h1>reset code</h1><span class="author">park.hansol@nhn.com (UIT개발실 박한솔)</span></header>
+        <section>
+            <article>
+                <!--
+                <div class="rm_setting notice">
+                    <h2>Notice</h2>
+                    <ul>
+                        <li>문서의 DOCTYPE은 초기화 되니 사용시 주의해 주시기 바랍니다.</li>
+                    </ul>
+                </div>
+                -->
+                <div class="rm_setting">
+                    <h2>초기화</h2>
+                    <ul class="user_reset">
+                        <li><input type="checkbox" id="reset_tab" disabled="disabled"><label for="reset_tab">tab(들여쓰기) 정리</label></li>
+                        <li><input type="checkbox" id="reset_href" checked="checked"><label for="reset_href">a href="#"</label></li>
+                    </ul>
+                </div>
+                <div class="rm_setting">
+                    <h2>제거</h2>
+                    <ul class="user_remove">
+                        <li><input type="checkbox" id="rm_blank" checked="checked" disabled="disabled"><label for="rm_blank">공백 및 개행된 라인 제거</label></li>
+                        <li><input type="checkbox" id="rm_script_tag" checked="checked" disabled="disabled"><label for="rm_script_tag">script tag</label></li>
+                        <li><input type="checkbox" id="rm_onload" checked="checked" disabled="disabled"><label for="rm_onload">onload="..."</label></li>
+                        <li><input type="checkbox" id="rm_onclick" checked="checked" disabled="disabled"><label for="rm_onclick">onclick="..."</label></li>
+                        <li><input type="checkbox" id="rm_onerror" checked="checked" disabled="disabled"><label for="rm_onerror">onerror="..."</label></li>
+                        <li><input type="checkbox" id="rm_nocr" checked="checked" disabled="disabled"><label for="rm_nocr">nocr="..."</label></li>
+                        <!--
+                        <li><input type="checkbox" id="rm_line_blank" checked="checked"><label for="rm_line_blank">blank line</label></li>
+                        -->
+                        <li><input type="checkbox" id="rm_target_blank" checked="checked" disabled="disabled"><label for="rm_target_blank">target="_blank"</label></li>
+                        <li><input type="checkbox" id="rm_iframe" checked="checked"><label for="rm_iframe">iframe</label></li>
+                        <li><input type="checkbox" id="rm_underbar" checked="checked"><label for="rm_underbar">_Name(언더바 클래스 및 아이디)</label></li>
+                    </ul>
+                </div>
+                <div class="rm_setting">
+                    <h2 class="blind">제거할 속성</h2>
+                    <div class="add_attr">
+                        <button type="button" class="btn_add_attr">제거할 속성 추가</button>
+                    </div>
+                    <ul class="user_rm_attr">
+                    </ul>
+                </div>
+                <div class="rm_setting">
+                    <h2 class="blind">제거할 태그</h2>
+                    <div class="add_tag">
+                        <button type="button" class="btn_add_tag">제거할 태그 추가</button>
+                    </div>
+                    <ul class="user_rm_tag">
+                    </ul>
+                </div>
+                <button type="button" class="btn_reset">reset!</button>
+            </article>
+            <article class="reset">
+                <div class="render"></div>
+                <textarea class="changing" rows="50">
+<html>
+<head>
+    <title>reset code</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
+    <link rel="stylesheet" type="text/css" href="../../vCommon/vCommon.css">
+    <link rel="stylesheet" type="text/css" href="css/reset_code.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="js/reset_code.js"></script>
+</head>
+<body>
+<em>testtest</em>
+<link rel="stylesheet" type="text/css" href='css/reset_code.css'>
+<a href='sdfsfdsdfsd.html' id="class _class" target="_blank" class="test" ></a>
+<a HREF="test.html" id='_id' target="_blank" class="_class class "></a>
+<a HREF="test.html" id="_class class" target="_blank" class='test '></a>
+
+<link rel="stylesheet" type="text/css" href='css/reset_code222222222.css'>
+
+<!-- script -->
+<script type="text/javascript">
+alert('test');
+</script>
+<script type="text/javascript">alert('test');</script>
+<iframe src="http://www.naver.com"></iframe>
+
+<div onclick="alert('test');" onerror="test()" class="test"></div>
+<div onClick='alert("test");' onError='test()' class="test"></div>
+
+<div onload="alert('test');" class="test"></div>
+<div onLoad='alert("test");' class="test"></div>
+
+<div nocr="alert('test');" class="test"></div>
+<div nocr='alert("test");' class="test"></div>
+<div nocr='' class="test"></div>
+<table>
+<thead>
+<tr>
+<th>th</th>
+<th>th</th>
+<th>th</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>td</td>
+<td>td</td>
+<td>td</td>
+</tr>
+</tbody>
+</table>
+<div>
+    <div>
+        <div>
+            div
+        </div>
+    </div>
+</div>
+</body>
+</html>
+                </textarea>
+            </article>
+        </section>
+    </div>
+<script>
+var resetCode = new reset.Code();
+</script>
+</body>
+</html>

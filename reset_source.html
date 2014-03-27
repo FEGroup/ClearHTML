@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>reset source</title>
+    <meta name="author" content="smilesol85">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <style>
+    	*{padding:0;margin:0}
+    	.blind{visibility:hidden !important;overflow:hidden !important;position:absolute !important;top:0 !important;left:0 !important;width:0 !important;height:0 !important;margin:0 !important;padding:0 !important;border:0 !important;font-size:0 !important;line-height:0 !important}
+    	h1{height:40px;line-height:40px;background:#a1a1a1;text-align:center;color:#fff}
+        h2{color:#aeaeae}
+        header{position:relative}
+        header em{position:absolute;bottom:5px;right:10px;font-size:12px;color:#000}
+        ul.lst_check{padding:10px 0}
+        ul.lst_check li input{margin-right:10px}
+        .notice{padding:10px 20px 30px;border-bottom:2px solid #eee}
+        .notice ul li{font-size:14px;padding-bottom:5px;}
+        .notice ul li strong{color:red}
+        .trans_ing{overflow:hidden;position:relative;width:100%;padding-bottom:40px}
+		.trans_ing #innerTextArea,.trans_ing #chgSource{float:left;width:49%;font-size:11px;color:#444}
+		#btn_reset{display:block;position:absolute;bottom:0;left:50%;margin:-16px 0 0 -63px;padding:10px}
+		#trans{display:none;position:absolute;top:0;left:-5000em}
+        #resultChg{display:none;border:1px solid #aaa}
+    </style>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>reset source</h1>
+        <div class="notice">
+	        <h2 class="blind">공지사항</h2>
+	        <ul>
+                <li>공지 <strong>body 안의 태그만 변환 가능합니다.</strong></li>
+                <li><a href="reset_code.html" target="_blank"><strong>정식버전으로 이동</strong></a></li>
+			</ul>
+		</div>
+		<em>문의 (park.hansol@nhn.com - NTS UI개발2팀 박한솔)</em>
+    </header>
+    <section>
+    	<ul class="lst_check">
+	        <li><input type="checkbox" id="Cahref" checked="checked"><label for="Cahref">a href="#" 초기화</label></li>
+	        <li><input type="checkbox" id="Conclick" checked="checked"><label for="Conclick">onclick="..." 제거</label></li>
+	        <li><input type="checkbox" id="Conerror" checked="checked"><label for="Conerror">onerror="..." 제거</label></li>
+            <li><input type="checkbox" id="Conload" checked="checked"><label for="Conload">onload="..." 제거</label></li>
+	        <li><input type="checkbox" id="Cnocr" checked="checked"><label for="Cnocr">nocr="..." 제거</label></li>
+	        <li><input type="checkbox" id="Cscript" checked="checked"><label for="Cscript">스크립트 태그 제거</label></li>
+            <li><input type="checkbox" id="Ciframe" checked="checked"><label for="Ciframe">iframe 태그 제거</label></li>
+        </ul>
+        <div class="trans_ing">
+            <textarea cols="100" rows="20" id="innerTextArea">
+                <!DOCTYPE html>
+                <html lang="en">
+                <head></head>
+                <body>
+                테스트 소스입니다.
+                복사하신 소스를 붙여넣어 주세요.
+                <link href="asdasdasdasd">
+                <a class="aaa" href="http://www.naver.com/">네이버</a>
+                <a href="#" onclick="alert('test');">onclick</a>
+                <a href="#" onerror="eeeee">onerr</a>
+                <a href="#" onload="eeeee">onload</a>
+                <a href="#" nocr="">nocr&</a>
+                <iframe src="#"></iframe>
+                <script>var a = 'a';</script>
+                <script type="text/javascript">var a = 'a';</script>
+    
+                <script>
+                var a = 'a';
+                </script>
+                <script type="text/javascript">
+                var a = 'a';
+                </script>
+                <script type="text/javascript" src="/js/c/nlog_20120319.min.js"></script>
+                </body>
+                </html>
+                
+            </textarea>
+            <button type="button" id="btn_reset">RESET SOURCE</button>
+            <textarea cols="100" rows="20" id="chgSource"></textarea>
+        </div>
+		<!-- 임시 복사 -->
+        <div id="trans" class="trans"></div>
+    </section>
+    <script>    
+	$('#btn_reset').click(function(){
+		/* RESET SOURCE 버튼 클릭 시 체크 여부 */
+		var inputCahref = document.getElementById('Cahref').checked;
+		var inputConclick = document.getElementById('Conclick').checked;
+		var inputConerror = document.getElementById('Conerror').checked;
+        var inputConload = document.getElementById('Conload').checked;
+		var inputCnocr = document.getElementById('Cnocr').checked;
+		var inputCscript = document.getElementById('Cscript').checked;
+		var inputCiframe = document.getElementById('Ciframe').checked;
+
+		// 입력된 소스 가져오기
+		getSource = $('#innerTextArea').val();
+		if(inputConclick == true){
+			var reOnclick = / onclick="[^"]+"/gi;
+            var reOnclick2 = / onclick=""/gi;
+			var reOnclick3 = / onClick="[^"]+"/gi;
+			var reOnclick4 = / onClick=""/gi;
+            var reOnclick5 = / onClick=&quot;[^?]+&quot;/gi;
+		}
+		if(inputConerror == true){
+			var reOnerr = / onerror="[^"]+"/gi;
+            var reOnerr2 = / onerror=""/gi;
+			var reOnerr3 = / onError="[^"]+"/gi;
+			var reOnerr4 = / onError=""/gi;
+		}
+        if(inputConload == true){
+            var reLoad = / onload="[^"]+"/gi;
+            var reLoad2 = / onload=""/gi;
+            var reLoad3 = / onLoad="[^"]+"/gi;
+            var reLoad4 = / onLoad=""/gi;
+        }
+		if(inputCnocr == true){
+			var reNocr = / nocr="[^"]+"/gi;
+			var reNocr2 = / nocr=""/gi;
+		}
+        if(inputCscript == true){
+			var reScript = /<script/gi;
+            var reScript2 = /<\/script>/gi;
+		}
+		
+		// 소스 변환
+		var chgHref = getSource.replace(reOnclick,'').replace(reOnclick2,'').replace(reOnclick3,'').replace(reOnclick4,'').replace(reOnclick5,'').replace(reOnerr,'').replace(reOnerr2,'').replace(reOnerr3,'').replace(reOnerr4,'').replace(reLoad,'').replace(reLoad2,'').replace(reNocr,'').replace(reNocr2,'').replace(reScript,'<div class="delClass"').replace(reScript2,'</div>');
+
+        // 복사 영역에 삽입
+        $('#trans').html(chgHref);
+        // a href 초기화 체크 되었으면 초기화
+		if(inputCahref == true){
+			$('#trans').find('a').attr('href','#');
+		}
+        // iframe 체크 되었으면 삭제
+        if(inputCiframe == true){
+			$('#trans iframe').remove();
+		}
+        // delClass 클래스 영역 삭제
+        if(inputCscript == true){
+            $('#trans .delClass').remove();
+        }
+        
+		// 최종 textarea 에 저장
+        var latest_source = $('#trans').html();
+        document.getElementById('chgSource').innerHTML = latest_source;
+	});
+    </script>
+</body>
+</html>
